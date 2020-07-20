@@ -1,0 +1,27 @@
+[package]
+name = "code-tour"
+version = "0.0.1"
+authors = ["Ivan Enderlin <ivan@mnt.io>"]
+edition = "2018"
+autotests = false
+publish = false
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "1.0", features = ["full", "extra-traits"] }
+quote = "1.0"
+proc-macro2 = "1.0"
+ansi_term = "0.12"
+
+[dev-dependencies]
+trybuild = { version = "1.0", features = ["diff"] }
+
+[features]
+default = ["colours"]
+colours = []
+
+[[test]]
+name = "tests"
+path = "tests/go.rs"
