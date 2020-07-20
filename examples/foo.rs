@@ -8,11 +8,11 @@ struct S {
 
 #[code_tour]
 fn main() {
-    /// Hello
-    /// World
+    /// Declare something.
+    /// Because it's an example.
     let a = S { x: 7, y: 42 };
 
-    let b = 4 + 3;
+    let b = a.x + a.y;
 
     /// Here is the result!
     let c = b + 1;
