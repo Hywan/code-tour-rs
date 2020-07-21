@@ -11,6 +11,9 @@ keywords = ["example", "cli", "learning"]
 categories = ["development-tools", "rust-patterns", "text-processing", "value-formatting", "visualization"]
 autotests = false
 publish = true
+exclude = [
+    "doc/*.png",
+]
 
 [lib]
 proc-macro = true
