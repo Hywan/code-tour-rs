@@ -1,4 +1,7 @@
-# Code Tour
+<h1>
+  <img src="./doc/logo.png" alt="Logo, just triangles" />
+  Code Tour
+</h1>
 
 This project is an attempt to improve Rust example-based learning
 approach.
