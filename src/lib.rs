@@ -47,10 +47,11 @@ pub fn code_tour(
                                         if let Some(TokenTree::Literal(literal)) =
                                             attribute.tokens.clone().into_iter().nth(1)
                                         {
-                                            let literal_string = literal.to_string();
+                                            let literal_string =
+                                                literal.to_string().replace("\\\'", "'");
 
                                             Some(format!(
-                                                "//{:<80}",
+                                                "▍{:<80}",
                                                 &literal_string[1..literal_string.len() - 1]
                                             ))
                                         } else {
@@ -62,11 +63,11 @@ pub fn code_tour(
                                 })
                                 .map(format_comment)
                                 .collect::<Vec<String>>()
-                                .join("\n");
+                                .join("\n ");
 
-                            let empty_line = format_comment(format!("//{:<80}", " "));
+                            let empty_line = format_comment(format!("▍{:<80}", " "));
                             let formatted_comment = format!(
-                                "{empty}\n{comment}\n{empty}\n",
+                                "\n {empty}\n {comment}\n {empty}\n",
                                 empty = empty_line,
                                 comment = formatted_comment
                             );
@@ -82,7 +83,7 @@ pub fn code_tour(
                             let statement =
                                 format_statement(quote!(#local_without_attrs).to_string());
 
-                            statements.push(println(quote!(">    {}\n", #statement)));
+                            statements.push(println(quote!(" {}\n", #statement)));
                         }
 
                         // Write the original statement, without the documentation.
@@ -96,8 +97,8 @@ pub fn code_tour(
                                 let ident = &local_pat.ident;
 
                                 quote!(
-                                    "<    {}\n\n",
-                                    format!("{:#?}", #ident).replace("\n", "\n|    ")
+                                    " ◀︎    {}\n\n",
+                                    format!("{:#?}", #ident).replace("\n", "\n ▐    ")
                                 )
                             }));
                         }
@@ -159,7 +160,7 @@ fn format_comment(comment: String) -> String {
     #[cfg(feature = "colours")]
     {
         Style::new()
-            .fg(Colour::Fixed(157))
+            .fg(Colour::Fixed(253))
             .on(Colour::Fixed(238))
             .paint(comment)
             .to_string()
@@ -176,7 +177,7 @@ fn format_statement(statement: String) -> String {
     {
         Style::new()
             .fg(Colour::Fixed(228))
-            .paint(statement)
+            .paint(format!("▶︎    {}", statement))
             .to_string()
     }
 
