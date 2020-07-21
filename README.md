@@ -63,5 +63,5 @@ foo`, and we'll see:
 The example annotations are replicated on the output during the
 execution.
 
-An annotation must be a comment of kind `///` that introduce a `let`
-binding. That's all for the moment!
+An annotation must be a comment of kind `///` or `/** … */` that
+introduces a `let` binding. That's all for the moment!
