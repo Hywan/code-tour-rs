@@ -1,10 +1,16 @@
 [package]
 name = "code-tour"
 version = "0.1.0"
-authors = ["Ivan Enderlin <ivan@mnt.io>"]
 edition = "2018"
+authors = ["Ivan Enderlin <ivan@mnt.io>"]
+description = "Enhanced example-based learning, i.e. awesome examples user experience"
+homepage = "https://github.com/Hywan/code-tour-rs"
+repository = "https://github.com/Hywan/code-tour-rs"
+readme = "README.md"
+keywords = ["example", "cli", "learning"]
+categories = ["development-tools", "rust-patterns", "text-processing", "value-formatting", "visualization"]
 autotests = false
-publish = false
+publish = true
 
 [lib]
 proc-macro = true
