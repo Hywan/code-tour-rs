@@ -12,6 +12,7 @@ categories = ["development-tools", "rust-patterns", "text-processing", "value-fo
 autotests = false
 publish = true
 exclude = [
+    ".github/*",
     "doc/*.png",
 ]
 
