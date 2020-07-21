@@ -14,8 +14,6 @@ pub fn code_tour(
     input: proc_macro::TokenStream,
 ) -> proc_macro::TokenStream {
     if let Ok(mut function) = parse::<ItemFn>(input.clone()) {
-        let mut output = TokenStream::new();
-
         let block_statements = &function.block.stmts;
         let mut statements = Vec::with_capacity(block_statements.len());
 
@@ -113,13 +111,7 @@ pub fn code_tour(
 
         function.block.stmts = statements;
 
-        let bla = quote! {
-            #function
-        };
-
-        bla.to_tokens(&mut output);
-
-        output.into()
+        quote!(#function).to_token_stream().into()
     } else {
         let span = TokenStream::from(input).into_iter().nth(0).unwrap().span();
         quote_spanned!(span => compile_error!("`code_tour` works on functions only")).into()
