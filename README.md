@@ -1,4 +1,4 @@
-<h1>
+<h1 align="center">
   <img src="./doc/logo.png" alt="Logo, just triangles" />
   Code Tour
 </h1>
