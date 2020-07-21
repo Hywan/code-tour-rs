@@ -59,26 +59,27 @@ Let's re-execute the example as previously with `cargo run --example
 foo`, and we'll see:
 
 ```rust
-//
-// Hello
-// World
-//
+ ▍
+ ▍ Declare something.
+ ▍ Because it's an example.
+ ▍
 
->    let a = S { x : 7, y : 42 } ;
+ ▶︎    let a = S { x : 7, y : 42 } ;
 
-<    S {
-|        x: 7,
-|        y: 42,
-|    }
+ ◀︎    S {
+ ▐        x: 7,
+ ▐        y: 42,
+ ▐    }
 
 
-//
-// Here is the result!
-//
 
->    let c = b + 1 ;
+ ▍
+ ▍ Here is the result!
+ ▍
 
-<    50
+ ▶︎    let c = b + 1 ;
+
+ ◀︎    50
 ```
 
 Here is a screenshot to see colours in the terminal:
