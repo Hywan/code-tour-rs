@@ -1,7 +1,9 @@
 <h1 align="center">
-  <img src="./doc/logo.png" alt="Logo, just triangles" />
+  <img src="./doc/logo.png" alt="Logo, just triangles" /><br />
   Code Tour
 </h1>
+
+## Introduction
 
 This project is an attempt to improve Rust example-based learning
 approach.
@@ -68,3 +70,12 @@ execution.
 
 An annotation must be a comment of kind `///` or `/** … */` that
 introduces a `let` binding. That's all for the moment!
+
+## Install
+
+This is a classic Rust project, thus add `code_tour` to your
+`Cargo.toml` file, and that's it.
+
+## License
+
+`BSD-3-Clause`, see `LICENSE.md`.
