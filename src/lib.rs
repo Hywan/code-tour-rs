@@ -1,5 +1,3 @@
-#[cfg(feature = "colours")]
-use ansi_term::{Colour, Style};
 use proc_macro2::{Span, TokenStream, TokenTree};
 use quote::{quote, quote_spanned, ToTokens};
 use std::iter::FromIterator;
@@ -7,6 +5,8 @@ use syn::{
     parse, punctuated::Punctuated, token, AttrStyle, Expr, ExprMacro, Ident, ItemFn, Macro,
     MacroDelimiter, Pat, Path, PathArguments, PathSegment, Stmt,
 };
+
+mod colours;
 
 #[proc_macro_attribute]
 pub fn code_tour(
@@ -59,11 +59,11 @@ pub fn code_tour(
 
                                     _ => None,
                                 })
-                                .map(format_comment)
+                                .map(colours::comment)
                                 .collect::<Vec<String>>()
                                 .join("\n ");
 
-                            let empty_line = format_comment(format!("▍{:<80}", " "));
+                            let empty_line = colours::comment(format!("▍{:<80}", " "));
                             let formatted_comment = format!(
                                 "\n {empty}\n {comment}\n {empty}\n",
                                 empty = empty_line,
@@ -79,7 +79,7 @@ pub fn code_tour(
                         // Write `println!("{}", stringify!(<local>))`.
                         {
                             let statement =
-                                format_statement(quote!(#local_without_attrs).to_string());
+                                colours::statement(quote!(#local_without_attrs).to_string());
 
                             statements.push(println(quote!(" {}\n", #statement)));
                         }
@@ -146,35 +146,4 @@ fn println(tokens: TokenStream) -> Stmt {
             spans: [Span::call_site()],
         },
     )
-}
-
-fn format_comment(comment: String) -> String {
-    #[cfg(feature = "colours")]
-    {
-        Style::new()
-            .fg(Colour::Fixed(253))
-            .on(Colour::Fixed(238))
-            .paint(comment)
-            .to_string()
-    }
-
-    #[cfg(not(feature = "colours"))]
-    {
-        comment
-    }
-}
-
-fn format_statement(statement: String) -> String {
-    #[cfg(feature = "colours")]
-    {
-        Style::new()
-            .fg(Colour::Fixed(228))
-            .paint(format!("▶︎    {}", statement))
-            .to_string()
-    }
-
-    #[cfg(not(feature = "colours"))]
-    {
-        statement
-    }
 }
