@@ -68,12 +68,22 @@ foo`, and we'll see:
 The example annotations are replicated on the output during the
 execution.
 
-Note: Running the example with `cargo +nightly` will generate a better
-output for the code, by using
-[`Span::source_text`](https://doc.rust-lang.org/proc_macro/struct.Span.html#method.source_text).
-
 An annotation must be a comment of kind `///` or `/** … */` that
 introduces a `let` binding. That's all for the moment!
+
+### Interactive mode
+
+Running the example with `--features interactive` will display a
+“Press Enter to continue, otherwise Ctrl-C to exit.” message after
+each step of your code.
+
+![cargo run example interactive](./doc/cargo_run_example_interactive.png)
+
+### Better source code display
+
+Running the example with `cargo +nightly` will generate a better
+output for the code, by using
+[`Span::source_text`](https://doc.rust-lang.org/proc_macro/struct.Span.html#method.source_text).
 
 ## Install
 
