@@ -60,8 +60,11 @@ fn main() {
 }
 ```
 
-Let's re-execute the example as previously with `cargo run --example
-foo`, and we'll see:
+Let's re-execute the example as previously, and we'll see:
+
+```rust
+$ cargo run --example foo
+```
 
 ![cargo run example](./doc/cargo_run_example.png)
 
@@ -77,13 +80,31 @@ Running the example with `--features interactive` will display a
 “Press Enter to continue, otherwise Ctrl-C to exit.” message after
 each step of your code.
 
+```rust
+$ cargo run --example foo --features interactive
+```
+
 ![cargo run example interactive](./doc/cargo_run_example_interactive.png)
+
+### Quiet mode
+
+Running the example with the environment variable `CODE_TOUR_QUIET`
+set will turn code-tour silent. Note that it won't disable the
+interactive mode (which is on purpose).
+
+```rust
+$ CODE_TOUR_QUIET=1 cargo run --example foo
+```
 
 ### Better source code display
 
 Running the example with `cargo +nightly` will generate a better
 output for the code, by using
 [`Span::source_text`](https://doc.rust-lang.org/proc_macro/struct.Span.html#method.source_text).
+
+```rust
+$ cargo +nightly run --example foo
+```
 
 ## Install
 
