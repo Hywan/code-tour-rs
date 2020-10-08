@@ -68,6 +68,10 @@ foo`, and we'll see:
 The example annotations are replicated on the output during the
 execution.
 
+Note: Running the example with `cargo +nightly` will generate a better
+output for the code, by using
+[`Span::source_text`](https://doc.rust-lang.org/proc_macro/struct.Span.html#method.source_text).
+
 An annotation must be a comment of kind `///` or `/** … */` that
 introduces a `let` binding. That's all for the moment!
 

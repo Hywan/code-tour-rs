@@ -26,6 +26,9 @@ quote = "1.0"
 proc-macro2 = "1.0"
 ansi_term = { version = "0.12", optional = true }
 
+[build-dependencies]
+rustc_version = "0.2"
+
 [features]
 default = ["colours"]
 colours = ["ansi_term"]

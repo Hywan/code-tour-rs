@@ -1,3 +1,5 @@
+#![cfg_attr(nightly, feature(proc_macro_span))]
+
 use proc_macro2::{Span, TokenStream, TokenTree};
 use quote::{quote, quote_spanned, ToTokens};
 use std::iter::FromIterator;
@@ -79,9 +81,8 @@ pub fn code_tour(
 
                         // Write `println!("{}", stringify!(<local>))`.
                         {
-                            let statement = colours::statement(format::rust_code(
-                                quote!(#local_without_attrs).to_string(),
-                            ));
+                            let statement =
+                                colours::statement(format::rust_code(&local_without_attrs));
 
                             statements.push(println(quote!(" {}\n", #statement)));
                         }
