@@ -1,6 +1,6 @@
 [package]
 name = "code-tour"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2018"
 authors = ["Ivan Enderlin <ivan@mnt.io>"]
 description = "Enhanced example-based learning, i.e. awesome examples user experience"
