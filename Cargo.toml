@@ -32,3 +32,4 @@ rustc_version = "0.2"
 [features]
 default = ["colours"]
 colours = ["ansi_term"]
+interactive = []

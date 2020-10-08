@@ -4,7 +4,7 @@ use proc_macro2::{Span, TokenStream, TokenTree};
 use quote::{quote, quote_spanned, ToTokens};
 use std::iter::FromIterator;
 use syn::{
-    parse, punctuated::Punctuated, token, AttrStyle, Expr, ExprMacro, Ident, ItemFn, Macro,
+    parse, punctuated::Punctuated, token, AttrStyle, Block, Expr, ExprMacro, Ident, ItemFn, Macro,
     MacroDelimiter, Pat, Path, PathArguments, PathSegment, Stmt,
 };
 
@@ -102,6 +102,34 @@ pub fn code_tour(
                                     format!("{:#?}", #ident).replace("\n", "\n ▐    ")
                                 )
                             }));
+                        }
+
+                        // Insert “Press Enter to continue…”
+                        #[cfg(feature = "interactive")]
+                        {
+                            let stream = quote!({
+                                {
+                                    use std::io::BufRead;
+
+                                    let mut line = String::new();
+                                    let stdin = ::std::io::stdin();
+
+                                    println!(
+                                        "\n(Press Enter to continue, otherwise Ctrl-C to exit).\n\n"
+                                    );
+
+                                    stdin
+                                        .lock()
+                                        .read_line(&mut line)
+                                        .expect("Failed to read a line from the user.");
+                                }
+                            });
+
+                            let block = parse::<Block>(stream.into()).unwrap();
+
+                            for statement in block.stmts {
+                                statements.push(statement);
+                            }
                         }
 
                         continue;
