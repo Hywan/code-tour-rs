@@ -29,12 +29,12 @@ fn main() {
 }
 ```
 
-When you run the example with `cargo run --example foo`, you'll see
-nothing! It means the author of the example must add `println!` or
-`dbg!` instructions everytime. And we are going to miss the comments
-too.
+When one runs the example with `cargo run --example foo`, nothing is
+printed!  It means the author of the example must add `println!` or
+`dbg!` instructions everytime. Moreover the users are going to miss
+the comments, that's really unfortunate.
 
-Enter `code_tour`.
+**Enter `code_tour`**.
 
 Let's rewrite the example as such:
 
