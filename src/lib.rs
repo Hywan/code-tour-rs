@@ -2,11 +2,9 @@
 
 use proc_macro2::{Span, TokenStream, TokenTree};
 use quote::{quote, quote_spanned, ToTokens};
-use std::iter::FromIterator;
-use syn::{
-    parse, punctuated::Punctuated, token, AttrStyle, Block, Expr, ExprMacro, Ident, ItemFn, Macro,
-    MacroDelimiter, Pat, Path, PathArguments, PathSegment, Stmt,
-};
+#[cfg(feature = "interactive")]
+use syn::Block;
+use syn::{parse, AttrStyle, Ident, ItemFn, Pat, Path, Stmt};
 
 mod colours;
 mod format;
@@ -150,31 +148,10 @@ pub fn code_tour(
 }
 
 fn println(tokens: TokenStream) -> Stmt {
-    Stmt::Semi(
-        Expr::Macro(ExprMacro {
-            attrs: vec![],
-            mac: Macro {
-                path: Path {
-                    leading_colon: None,
-                    segments: Punctuated::from_iter(
-                        vec![PathSegment {
-                            ident: Ident::new("println", Span::call_site()),
-                            arguments: PathArguments::None,
-                        }]
-                        .into_iter(),
-                    ),
-                },
-                bang_token: token::Bang {
-                    spans: [Span::call_site()],
-                },
-                delimiter: MacroDelimiter::Paren(token::Paren {
-                    span: Span::call_site(),
-                }),
-                tokens,
-            },
-        }),
-        token::Semi {
-            spans: [Span::call_site()],
-        },
-    )
+    let stream = quote!(if ::std::env::var("CODE_TOUR_QUIET").is_err() {
+        println!(#tokens);
+    });
+    let semi = parse::<Stmt>(stream.into()).unwrap();
+
+    semi
 }
