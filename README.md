@@ -108,7 +108,7 @@ $ cargo +nightly run --example foo
 
 ## Install
 
-This is a classic Rust project, thus add `code_tour` to your
+This is a classic Rust project, thus add `code-tour` to your
 `Cargo.toml` file, and that's it.
 
 ## License
